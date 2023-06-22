@@ -30,15 +30,22 @@ prev_dif=0;
 e = 0;
 e_dot = 0;
 u_i = 0;
-global k1 k2 k3
+global k1 k2 k3 a b c 
 
 
 
 for t=2:1:run_time/tau
     
-    [outputs(:,t),states(:,t)]=Pend_sys_non_linear(outputs(:,t-1),u_mfc(:,t-1),ref(:,t)); %Adding noise to the system would be at outputs
+    %[outputs(:,t),states(:,t)]=Pend_sys_non_linear(outputs(:,t-1),u_mfc(:,t-1),ref(t)); %Adding noise to the system would be at outputs
+    
+    states(1,t) = outputs(2,t-1);
+    states(2,t) = -a*sin(outputs(1,t-1)) -b*outputs(2,t-1) +c*u_mfc(:,t-1);   %x2
+    states(3,t) = ref(t)-outputs(1,t-1);
+    outputs(:,t) = (states(:,t) *tau)+outputs(:,t-1);
 
-    [e(:,t),e_dot(:,t)] = calc_error_mfc_state(outputs,ref,t,e(:,t-1));
+    %[e(:,t),e_dot(:,t)] = calc_error_mfc_state(outputs(1,t),ref(t),t,e(:,t-1));
+    e(t) = ref(t) - outputs(1,t);
+    e_dot(t) = (e(t) - e(t-1)) / tau;
 
     u_i = u_i + e(:,t)*tau;  
     u(:,t) = k2*e_dot(:,t) + k1*e(:,t);
