@@ -28,7 +28,7 @@ figure
 plot(time,outputs(2,:)*(180/pi),'-','Linewidth',2);
 hold on
 % plot(time,ref*(180/pi),'--','Linewidth',2)
-plot(time,x_hat(2,:),'-.','Linewidth',2)
+plot(time,x_hat(2,:)*(180/pi),'-.','Linewidth',2)
 % plot(time,x_rkf(2,:),'-.','Linewidth',2)
 grid on
 xlabel('Time (s)')
@@ -36,25 +36,25 @@ ylabel('Speed of pendulum')
 title('State 2 speed')
 legend('Speed of Pendulum','Estimated Speed','Location','Best')
 
-figure
-plot(time,exp_F,'-','LineWidth',2)
-hold on
-plot(time,x_hat(3,:),'--','LineWidth',2)
-% plot(time,x_hat2(3,:),'-.','LineWidth',2)
-grid on
-xlabel('Time (s)')
-ylabel('Non linearities')
-legend('F via Lie derivatives','Calculated F using KF','Location','Best')
-axes('Position',[.550 .15 .3 .2])
-box on
-rng=(1980:2505);
-plot(time(1,rng),exp_F(1,rng),'-','Linewidth',2)
-hold on
-plot(time(1,rng),x_hat(3,rng),'--','Linewidth',2)
-% plot(time(1,rng),x_hat2(3,rng),'-.','LineWidth',2)
-grid on
-% print('-dpng','-r300','Fig4')
-
+% figure
+% plot(time,exp_F,'-','LineWidth',2)
+% hold on
+% plot(time,x_hat(3,:),'--','LineWidth',2)
+% % plot(time,x_hat2(3,:),'-.','LineWidth',2)
+% grid on
+% xlabel('Time (s)')
+% ylabel('Non linearities')
+% legend('F via Lie derivatives','Calculated F using KF','Location','Best')
+% axes('Position',[.550 .15 .3 .2])
+% box on
+% rng=(1980:2505);
+% plot(time(1,rng),exp_F(1,rng),'-','Linewidth',2)
+% hold on
+% plot(time(1,rng),x_hat(3,rng),'--','Linewidth',2)
+% % plot(time(1,rng),x_hat2(3,rng),'-.','LineWidth',2)
+% grid on
+% % print('-dpng','-r300','Fig4')
+% 
 
 % figure
 % subplot(4,2,1)
